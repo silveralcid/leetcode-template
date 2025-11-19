@@ -25,8 +25,14 @@ fi
 md="$target_dir/$name.md"
 py="$target_dir/$name.py"
 
-# Create files if missing
-[ ! -f "$md" ] && touch "$md"
-[ ! -f "$py" ] && touch "$py"
+# Create .md file if missing and add template
+if [ ! -f "$md" ]; then
+  echo -e "# Problem\n\n# Journal\n" > "$md"
+fi
+
+# Create .py file if missing and add template
+if [ ! -f "$py" ]; then
+  echo -e "# Brute Force\n\n# Optimal\n" > "$py"
+fi
 
 echo "Created: $md and $py"

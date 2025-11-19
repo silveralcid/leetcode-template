@@ -24,8 +24,16 @@ else {
 $md = Join-Path $targetDir "$name.md"
 $py = Join-Path $targetDir "$name.py"
 
-# Create files if they don't already exist
-if (-not (Test-Path $md)) { New-Item -Path $md -ItemType File | Out-Null }
-if (-not (Test-Path $py)) { New-Item -Path $py -ItemType File | Out-Null }
+# Create .md if missing and add template
+if (-not (Test-Path $md)) {
+    New-Item -Path $md -ItemType File | Out-Null
+    Set-Content -Path $md -Value "# Problem`n`n# Journal`n"
+}
+
+# Create .py if missing and add template
+if (-not (Test-Path $py)) {
+    New-Item -Path $py -ItemType File | Out-Null
+    Set-Content -Path $py -Value "# Brute Force`n`n# Optimal`n"
+}
 
 Write-Output "✅ Created: $name.md and $name.py in $targetDir"
